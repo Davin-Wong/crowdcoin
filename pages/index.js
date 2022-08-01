@@ -1,14 +1,21 @@
 import React from 'react';
-import { Card } from 'semantic-ui-react';
+import { Card, Button } from 'semantic-ui-react';
 import factory from '../ethereum/factory';
+import Layout from '../components/Layout';
+import { Link } from '../routes';
 
-function App({ campaigns }) {
+const App = ({ campaigns }) => {
   const renderCampaigns = () => {
     const items = campaigns.map((address) => {
       return {
         header: address,
-        description: <a href='#'>View Campaign</a>,
+        description: (
+          <Link route={`/campaigns/${address}`}>
+            <a>View Campaign</a>
+          </Link>
+        ),
         fluid: true,
+        style: { marginLeft: '0px' },
       };
     });
 
@@ -16,16 +23,24 @@ function App({ campaigns }) {
   };
 
   return (
-    <div>
-      <link
-        async
-        rel='stylesheet'
-        href='https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css'
-      />
-      {renderCampaigns()}
-    </div>
+    <Layout>
+      <div>
+        <h3>Open Campaigns</h3>
+        <Link route='/campaigns/new'>
+          <a>
+            <Button
+              floated='right'
+              content='Create Campaign'
+              icon='add circle'
+              primary
+            />
+          </a>
+        </Link>
+        {renderCampaigns()}
+      </div>
+    </Layout>
   );
-}
+};
 
 App.getInitialProps = async () => {
   const campaigns = await factory.methods.getDeployedCampaigns().call();
