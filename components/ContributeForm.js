@@ -47,7 +47,7 @@ const ContributeForm = ({ address }) => {
       </Form.Field>
       <Message error header='Oops!' content={errorMessage} />
       <Button loading={loading} primary>
-        Contribute!
+        Contribute
       </Button>
     </Form>
   );
