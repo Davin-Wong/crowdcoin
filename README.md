@@ -1,1 +1,1 @@
-# Web3 version of Kickstart
+# CrowdCoin - A Web3 version of Kickstart
